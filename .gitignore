@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+
+# logs
+*.log
+npm-debug.log*
+
+# env
+.env
+
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# mac
+.DS_Store
+
+# vscode
+.vscode/
+
+# generated
+coverage/
+
+# ts-node
+*.tsbuildinfo
