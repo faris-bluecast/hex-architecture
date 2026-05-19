@@ -7,6 +7,19 @@ datasource db {
 }
 
 model Task {
-  id    String @id
-  title String
+  id         String    @id
+  title      String
+  employeeId String?   @unique
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+}
+
+model Employee {
+  id           String  @id @default(uuid(7))
+  employeeCode String  @map("employee_code")
+  employeeName String  @map("employee_name")
+  legacyId     String? @map("legacy_id")
+  email        String?
+  phoneNumber  String? @map("phone_number")
+  biometricId  String  @map("biometric_id")
+  task         Task?
 }
