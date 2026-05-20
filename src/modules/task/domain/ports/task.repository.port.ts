@@ -4,4 +4,6 @@ export interface TaskRepositoryPort {
   save(task: Task): Promise<void>;
   findById(id: string): Promise<Task | null>;
   findAll(): Promise<Task[]>;
+
+  exists(id: string): Promise<boolean>;
 }

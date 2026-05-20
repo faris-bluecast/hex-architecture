@@ -36,4 +36,11 @@ export class PrismaTaskRepository implements TaskRepositoryPort {
 
     return tasks.map((task) => new Task(task.id, task.title));
   }
+
+  async exists(id: string): Promise<boolean> {
+    const count = await this.prisma.task.count({
+      where: { id },
+    });
+    return count > 1;
+  }
 }

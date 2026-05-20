@@ -7,19 +7,29 @@ datasource db {
 }
 
 model Task {
-  id         String    @id
-  title      String
-  employeeId String?   @unique
-  employee   Employee? @relation(fields: [employeeId], references: [id])
+  id                  String                @id @default(uuid(7))
+  title               String                @map("title")
+  plannedQty          Int                   @default(0) @map("planned_qty")
+  employeeAssignments EmployeeAssignments[]
 }
 
 model Employee {
-  id           String  @id @default(uuid(7))
-  employeeCode String  @map("employee_code")
-  employeeName String  @map("employee_name")
-  legacyId     String? @map("legacy_id")
-  email        String?
-  phoneNumber  String? @map("phone_number")
-  biometricId  String  @map("biometric_id")
-  task         Task?
+  id                  String                @id @default(uuid(7))
+  employeeCode        String                @map("employee_code")
+  employeeName        String                @map("employee_name")
+  legacyId            String?               @map("legacy_id")
+  email               String?               @map("email")
+  phoneNumber         String?               @map("phone_number")
+  biometricId         String                @map("biometric_id")
+  employeeAssignments EmployeeAssignments[]
+}
+
+model EmployeeAssignments {
+  id         String @id @default(uuid(7))
+  taskId     String @map("task_id")
+  employeeId String @map("employee_id")
+  doneQty    Int?   @map("done_qty")
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+  task     Task     @relation(fields: [taskId], references: [id])
 }
