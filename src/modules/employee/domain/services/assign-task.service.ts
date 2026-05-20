@@ -10,11 +10,17 @@ export class AssignTaskService implements AssignTaskUseCase {
   ) {}
 
   async execute(dto: AssignTaskDto): Promise<void> {
+    const user = await this.employeeRepository.findById(dto.employeeId);
+    if (!user) {
+      throw new Error(dto.employeeId);
+    }
+
     // NOTE: Handle exceptions
     if (!this.taskReader.exists(dto.taskId)) {
       throw new Error("Not Found");
     }
+    user.assignTask(dto.taskId, dto.actualQty);
 
-    this.employeeRepository.assignTask(dto);
+    this.employeeRepository.assignTask(user.id, user.getAssignedTasks());
   }
 }

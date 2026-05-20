@@ -1,8 +1,10 @@
 import { Logger } from "@nestjs/common";
 import { PrismaService } from "../../../../../prisma/prisma.service";
 import { EmployeeRepositoryPort } from "../../../domain/ports/employee.repository.port";
-import { Employee } from "../../../domain/entities/employee.entity";
-import { AssignTaskDto } from "../../../application/dto/assign-task.dto";
+import {
+  Employee,
+  TaskAssignment,
+} from "../../../domain/entities/employee.entity";
 
 export class PrismaEmployeeRepository implements EmployeeRepositoryPort {
   private readonly logger = new Logger(PrismaEmployeeRepository.name);
@@ -80,13 +82,16 @@ export class PrismaEmployeeRepository implements EmployeeRepositoryPort {
     });
   }
 
-  async assignTask(assignedTask: AssignTaskDto): Promise<void> {
-    await this.prisma.employeeAssignments.create({
-      data: {
+  async assignTask(
+    employeeId: string,
+    assignedTasks: TaskAssignment[],
+  ): Promise<void> {
+    await this.prisma.employeeAssignments.createMany({
+      data: assignedTasks.map((assignedTask) => ({
         taskId: assignedTask.taskId,
-        employeeId: assignedTask.employeeId,
-        doneQty: assignedTask.actualQty,
-      },
+        employeeId: employeeId,
+        doneQty: assignedTask.doneQty,
+      })),
     });
   }
 }
