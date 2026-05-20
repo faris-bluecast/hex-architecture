@@ -1,5 +1,5 @@
 export interface EmployeeProps {
-  id: string;
+  id?: string;
   employeeCode: string;
   employeeName: string;
   legacyId?: string | null;
@@ -16,7 +16,7 @@ export class TaskAssignment {
 }
 
 export class Employee {
-  public readonly id: string;
+  public readonly id?: string;
   public employeeCode: string;
   public employeeName: string;
   public legacyId?: string | null;

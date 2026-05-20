@@ -2,6 +2,9 @@ import { EmployeeRepositoryPort } from "../../domain/ports/employee.repository.p
 import { TaskReaderPort } from "../ports/task-reader.port";
 import { AssignTaskDto } from "../../application/dto/assign-task.dto";
 import { AssignTaskUseCase } from "../../application/use-cases/assign-task.use-case";
+import { CoreAssert } from "../../../common/util/assert/Assert";
+import { Exception } from "../../../common/exception/Exception";
+import { Code } from "../../../common/code/Code";
 
 export class AssignTaskService implements AssignTaskUseCase {
   constructor(
@@ -10,17 +13,24 @@ export class AssignTaskService implements AssignTaskUseCase {
   ) {}
 
   async execute(dto: AssignTaskDto): Promise<void> {
-    const user = await this.employeeRepository.findById(dto.employeeId);
-    if (!user) {
-      throw new Error(dto.employeeId);
-    }
+    const user = CoreAssert.notEmpty(
+      await this.employeeRepository.findById(dto.employeeId),
+      Exception.new({
+        code: Code.ENTITY_NOT_FOUND_ERROR,
+        overrideMessage: "Post owner not found.",
+      }),
+    );
 
-    // NOTE: Handle exceptions
-    if (!this.taskReader.exists(dto.taskId)) {
-      throw new Error("Not Found");
-    }
+    CoreAssert.isTrue(
+      !(await this.taskReader.exists(dto.taskId)),
+      Exception.new({
+        code: Code.ENTITY_NOT_FOUND_ERROR,
+        overrideMessage: "Task not found",
+      }),
+    );
+
     user.assignTask(dto.taskId, dto.actualQty);
 
-    this.employeeRepository.assignTask(user.id, user.getAssignedTasks());
+    this.employeeRepository.assignTask(user.id!, user.getAssignedTasks());
   }
 }
