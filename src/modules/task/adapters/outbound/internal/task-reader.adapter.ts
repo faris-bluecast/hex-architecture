@@ -1,4 +1,4 @@
-import { TaskReaderPort } from "../../../../employee/domain/ports/task-reader.port";
+import { TaskReaderPort } from "../../../../employee/application/ports/task-reader.port";
 import { TaskRepositoryPort } from "../../../domain/ports/task.repository.port";
 
 export class TaskReaderAdapter implements TaskReaderPort {
