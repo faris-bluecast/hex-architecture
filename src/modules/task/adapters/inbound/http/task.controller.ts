@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
 
-import type { CreateTaskDto } from "../../../application/dto/create-task.dto";
+import { CreateTaskDto } from "../../../application/dto/create-task.dto";
 
 import type { CreateTaskUseCase } from "../../../application/use-cases/create-task.use-case";
 import type { GetTaskUseCase } from "../../../application/use-cases/get-task.use-case";

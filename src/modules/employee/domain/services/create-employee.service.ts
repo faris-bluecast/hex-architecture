@@ -18,6 +18,6 @@ export class CreateEmployeeService implements CreateEmployeeUseCase {
       biometricId: dto.biometricId,
     });
 
-    this.employeeRepository.save(employee);
+    await this.employeeRepository.save(employee);
   }
 }

@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
 import type { AssignTaskDto } from "../../../application/dto/assign-task.dto";
-import type { CreateEmployeeDto } from "../../../application/dto/create-employee.dto";
+import { CreateEmployeeDto } from "../../../application/dto/create-employee.dto";
 import type { AssignTaskUseCase } from "../../../application/use-cases/assign-task.use-case";
 import type { CreateEmployeeUseCase } from "../../../application/use-cases/create-employee.use-case";
 import type { ListEmployeeUseCase } from "../../../application/use-cases/list-employees.use-case";
