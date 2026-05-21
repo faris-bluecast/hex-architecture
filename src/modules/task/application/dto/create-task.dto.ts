@@ -1,8 +1,7 @@
-import { createZodDto } from "nestjs-zod";
-import { z } from "zod";
+import { IsString, IsNotEmpty } from 'class-validator';
 
-export const CreateTaskSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-});
-
-export class CreateTaskDto extends createZodDto(CreateTaskSchema) {}
+export class CreateTaskDto {
+  @IsString()
+  @IsNotEmpty()
+  title!: string;
+}

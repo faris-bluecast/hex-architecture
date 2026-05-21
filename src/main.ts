@@ -1,14 +1,12 @@
-import { Logger } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
-import { ZodValidationPipe } from "nestjs-zod";
-import { AppModule } from "./app.module";
-import { AllExceptionsFilter } from "./modules/common/filters/AllExceptionFilter";
-import { TransformInterceptor } from "./modules/common/interceptors/transform.interceptor";
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ZodValidationPipe());
+  app.useGlobalPipes(new ValidationPipe());
 
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalFilters(new AllExceptionsFilter());

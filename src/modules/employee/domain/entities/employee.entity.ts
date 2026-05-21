@@ -11,7 +11,7 @@ export interface EmployeeProps {
 export class TaskAssignment {
   constructor(
     public readonly taskId: string,
-    public readonly doneQty?: number,
+    public readonly doneQty: number,
   ) {}
 }
 
@@ -35,7 +35,7 @@ export class Employee {
     this.biometricId = props.biometricId;
   }
 
-  assignTask(taskId: string, doneQty?: number): void {
+  assignTask(taskId: string, doneQty: number): void {
     const assignment = new TaskAssignment(taskId, doneQty);
     this.assignedTasks.push(assignment);
   }
