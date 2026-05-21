@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
 
 import { TaskController } from "./adapters/inbound/http/task.controller";
+import { TaskDITokens } from "./di/task-di-tokens";
 import {
   internalAdapters,
   persistentProviders,
   useCaseProviders,
 } from "./infrastructure/providers/task.providers";
-import { TaskDITokens } from "./di/task-di-tokens";
 
 @Module({
   controllers: [TaskController],

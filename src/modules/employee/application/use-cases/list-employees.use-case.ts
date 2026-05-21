@@ -1,4 +1,4 @@
-import { UseCase } from "../../../common/use-case/UseCase";
-import { Employee } from "../../domain/entities/employee.entity";
+import type { UseCase } from "../../../common/use-case/UseCase";
+import type { Employee } from "../../domain/entities/employee.entity";
 
 export interface ListEmployeeUseCase extends UseCase<void, Employee[]> {}

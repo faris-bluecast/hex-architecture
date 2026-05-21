@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
-import { Task } from "../../../domain/entities/task.entity";
-import { TaskRepositoryPort } from "../../../domain/ports/task.repository.port";
+import type { Task } from "../../../domain/entities/task.entity";
+import type { TaskRepositoryPort } from "../../../domain/ports/task.repository.port";
 
 export class InMemoryTaskRepository implements TaskRepositoryPort {
   private readonly logger = new Logger(InMemoryTaskRepository.name);

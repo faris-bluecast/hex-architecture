@@ -1,8 +1,8 @@
-import { EmployeeRepositoryPort } from "../../domain/ports/employee.repository.port";
-import { Employee } from "../../domain/entities/employee.entity";
-import { CreateEmployeeDto } from "../../application/dto/create-employee.dto";
-import { CreateEmployeeUseCase } from "../../application/use-cases/create-employee.use-case";
 import { randomUUID } from "node:crypto";
+import type { CreateEmployeeDto } from "../../application/dto/create-employee.dto";
+import type { CreateEmployeeUseCase } from "../../application/use-cases/create-employee.use-case";
+import { Employee } from "../../domain/entities/employee.entity";
+import type { EmployeeRepositoryPort } from "../../domain/ports/employee.repository.port";
 
 export class CreateEmployeeService implements CreateEmployeeUseCase {
   constructor(private readonly employeeRepository: EmployeeRepositoryPort) {}

@@ -1,12 +1,12 @@
-import { PrismaTaskRepository } from "../../adapters/outbound/persistence/prisma-task.repository";
+import type { Provider } from "@nestjs/common";
 import { PrismaService } from "../../../../prisma/prisma.service";
-import { Provider } from "@nestjs/common";
-import { TaskRepositoryPort } from "../../domain/ports/task.repository.port";
+import { TaskReaderAdapter } from "../../adapters/outbound/internal/task-reader.adapter";
+import { PrismaTaskRepository } from "../../adapters/outbound/persistence/prisma-task.repository";
+import { TaskDITokens } from "../../di/task-di-tokens";
+import type { TaskRepositoryPort } from "../../domain/ports/task.repository.port";
 import { CreateTaskService } from "../../domain/services/create-task.service";
 import { GetTaskService } from "../../domain/services/get-task.service";
 import { ListTasksService } from "../../domain/services/list-task.service";
-import { TaskDITokens } from "../../di/task-di-tokens";
-import { TaskReaderAdapter } from "../../adapters/outbound/internal/task-reader.adapter";
 
 export const persistentProviders: Provider[] = [
   PrismaService,

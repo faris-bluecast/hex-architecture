@@ -1,16 +1,9 @@
-export class EmployeeDITokens {
+export const EmployeeDITokens = {
   // Use-cases
-  public static readonly CreateEmployeeUseCase: unique symbol = Symbol(
-    "CreateEmployeeUseCase",
-  );
-  public static readonly ListEmployeeUseCase: unique symbol = Symbol(
-    "ListEmployeeUseCase",
-  );
-  public static readonly AssignTaskUseCase: unique symbol = Symbol(
-    "AssignTaskUseCase",
-  );
+  CreateEmployeeUseCase: Symbol("CreateEmployeeUseCase"),
+  ListEmployeeUseCase: Symbol("ListEmployeeUseCase"),
+  AssignTaskUseCase: Symbol("AssignTaskUseCase"),
 
   // Repositories
-  public static readonly EmployeeRepository: unique symbol =
-    Symbol("EmployeeRepository");
-}
+  EmployeeRepository: Symbol("EmployeeRepository"),
+};

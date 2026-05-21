@@ -1,9 +1,6 @@
 import { Logger } from "@nestjs/common";
-import { EmployeeRepositoryPort } from "../../../domain/ports/employee.repository.port";
-import {
-  Employee,
-  TaskAssignment,
-} from "../../../domain/entities/employee.entity";
+import type { Employee, TaskAssignment } from "../../../domain/entities/employee.entity";
+import type { EmployeeRepositoryPort } from "../../../domain/ports/employee.repository.port";
 
 export class InMemoryEmployeeRepository implements EmployeeRepositoryPort {
   private readonly logger = new Logger(InMemoryEmployeeRepository.name);
@@ -26,15 +23,10 @@ export class InMemoryEmployeeRepository implements EmployeeRepositoryPort {
   }
 
   async findByEmployeeCode(employeeCode: string): Promise<Employee | null> {
-    return (
-      this.employees.find((task) => task.employeeCode === employeeCode) || null
-    );
+    return this.employees.find((task) => task.employeeCode === employeeCode) || null;
   }
 
-  async assignTask(
-    employeeId: string,
-    assignedTask: TaskAssignment[],
-  ): Promise<void> {
+  async assignTask(employeeId: string, assignedTask: TaskAssignment[]): Promise<void> {
     const employee = this.employees.find((e) => e.id === employeeId);
 
     if (!employee) throw new Error("Employee not found");

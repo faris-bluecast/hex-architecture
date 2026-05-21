@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
 
-import { CreateTaskDto } from "../../../application/dto/create-task.dto";
+import type { CreateTaskDto } from "../../../application/dto/create-task.dto";
 
-import { CreateTaskUseCase } from "../../../application/use-cases/create-task.use-case";
-import { GetTaskUseCase } from "../../../application/use-cases/get-task.use-case";
-import { ListTasksUseCase } from "../../../application/use-cases/list-tasks.use-case";
+import type { CreateTaskUseCase } from "../../../application/use-cases/create-task.use-case";
+import type { GetTaskUseCase } from "../../../application/use-cases/get-task.use-case";
+import type { ListTasksUseCase } from "../../../application/use-cases/list-tasks.use-case";
 import { TaskDITokens } from "../../../di/task-di-tokens";
 
 @Controller("tasks")

@@ -1,4 +1,4 @@
-import { Employee, TaskAssignment } from "../entities/employee.entity";
+import type { Employee, TaskAssignment } from "../entities/employee.entity";
 
 export interface EmployeeRepositoryPort {
   save(employee: Employee): Promise<void>;

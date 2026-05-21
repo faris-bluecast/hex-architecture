@@ -1,16 +1,11 @@
-export class TaskDITokens {
+export const TaskDITokens = {
   // Use-cases
-  public static readonly CreateTaskUseCase: unique symbol =
-    Symbol("CreateTaskUseCase");
-  public static readonly ListTasksUseCase: unique symbol =
-    Symbol("ListTaskUseCase");
-  public static readonly GetTaskUseCase: unique symbol =
-    Symbol("GetTaskUseCase");
+  CreateTaskUseCase: Symbol("CreateTaskUseCase"),
+  ListTasksUseCase: Symbol("ListTaskUseCase"),
+  GetTaskUseCase: Symbol("GetTaskUseCase"),
 
-  public static readonly TaskReaderPort: unique symbol =
-    Symbol("TaskReaderPort");
+  TaskReaderPort: Symbol("TaskReaderPort"),
 
   // Repositories
-  public static readonly TaskRepository: unique symbol =
-    Symbol("TaskRepository");
-}
+  TaskRepository: Symbol("TaskRepository"),
+} as const;

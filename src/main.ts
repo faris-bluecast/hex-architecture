@@ -1,16 +1,21 @@
+import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-
-import { AppModule } from "./app.module";
 import { ZodValidationPipe } from "nestjs-zod";
+import { AppModule } from "./app.module";
+import { AllExceptionsFilter } from "./modules/common/filters/AllExceptionFilter";
+import { TransformInterceptor } from "./modules/common/interceptors/transform.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ZodValidationPipe());
 
-  await app.listen(3000);
+  app.useGlobalInterceptors(new TransformInterceptor());
+  app.useGlobalFilters(new AllExceptionsFilter());
 
-  console.log("Server running on http://localhost:3000");
+  await app.listen(3000, () => {
+    Logger.log("Server running on http://localhost:3000", AppModule.name);
+  });
 }
 
 bootstrap();

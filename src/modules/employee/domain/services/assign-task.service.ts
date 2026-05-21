@@ -1,10 +1,10 @@
-import { EmployeeRepositoryPort } from "../../domain/ports/employee.repository.port";
-import { AssignTaskDto } from "../../application/dto/assign-task.dto";
-import { AssignTaskUseCase } from "../../application/use-cases/assign-task.use-case";
-import { CoreAssert } from "../../../common/util/assert/Assert";
-import { Exception } from "../../../common/exception/Exception";
 import { Code } from "../../../common/code/Code";
-import { TaskReaderPort } from "../../application/ports/task-reader.port";
+import { Exception } from "../../../common/exception/Exception";
+import { CoreAssert } from "../../../common/util/assert/Assert";
+import type { AssignTaskDto } from "../../application/dto/assign-task.dto";
+import type { TaskReaderPort } from "../../application/ports/task-reader.port";
+import type { AssignTaskUseCase } from "../../application/use-cases/assign-task.use-case";
+import type { EmployeeRepositoryPort } from "../../domain/ports/employee.repository.port";
 
 export class AssignTaskService implements AssignTaskUseCase {
   constructor(
@@ -17,7 +17,7 @@ export class AssignTaskService implements AssignTaskUseCase {
       await this.employeeRepository.findById(dto.employeeId),
       Exception.new({
         code: Code.ENTITY_NOT_FOUND_ERROR,
-        overrideMessage: "Post owner not found.",
+        overrideMessage: "Employee not found",
       }),
     );
 
@@ -31,6 +31,6 @@ export class AssignTaskService implements AssignTaskUseCase {
 
     user.assignTask(dto.taskId, dto.actualQty);
 
-    this.employeeRepository.assignTask(user.id!, user.getAssignedTasks());
+    this.employeeRepository.assignTask(dto.employeeId, user.getAssignedTasks());
   }
 }

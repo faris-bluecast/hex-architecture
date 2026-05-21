@@ -1,8 +1,8 @@
 import { Logger } from "@nestjs/common";
-import { PrismaService } from "../../../../../prisma/prisma.service";
+import type { PrismaService } from "../../../../../prisma/prisma.service";
 
 import { Task } from "../../../domain/entities/task.entity";
-import { TaskRepositoryPort } from "../../../domain/ports/task.repository.port";
+import type { TaskRepositoryPort } from "../../../domain/ports/task.repository.port";
 
 export class PrismaTaskRepository implements TaskRepositoryPort {
   private readonly logger = new Logger(PrismaTaskRepository.name);
