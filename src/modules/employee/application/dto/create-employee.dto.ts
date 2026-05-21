@@ -1,27 +1,17 @@
-import { IsEmail, IsOptional, IsString, IsNotEmpty } from "class-validator";
+import { createZodDto } from "nestjs-zod";
+import { z } from "zod";
 
-export class CreateEmployeeDto {
-  @IsString()
-  @IsNotEmpty()
-  employeeCode!: string;
+export const CreateEmployeeSchema = z.object({
+  employeeCode: z.string().min(1, "Employee code is required"),
+  employeeName: z.string().min(1, "Employee name is required"),
 
-  @IsString()
-  @IsNotEmpty()
-  employeeName!: string;
+  // Optional fields
+  legacyId: z.string().optional(),
+  email: z.email().optional(),
+  phoneNumber: z.string().optional(),
 
-  @IsOptional()
-  @IsString()
-  legacyId?: string;
+  biometricId: z.string().min(1, "Biometric ID is required"),
+});
 
-  @IsOptional()
-  @IsEmail()
-  email?: string;
-
-  @IsOptional()
-  @IsString()
-  phoneNumber?: string;
-
-  @IsString()
-  @IsNotEmpty()
-  biometricId!: string;
-}
+// Inferred TypeScript type
+export class CreateEmployeeDto extends createZodDto(CreateEmployeeSchema) {}

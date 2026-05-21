@@ -1,15 +1,11 @@
-import { IsOptional, IsNotEmpty, IsUUID, IsInt } from "class-validator";
+import { createZodDto } from "nestjs-zod";
+import { z } from "zod";
 
-export class AssignTaskDto {
-  @IsUUID()
-  @IsNotEmpty()
-  employeeId!: string;
+export const AssignTaskSchema = z.object({
+  employeeId: z.uuid(),
+  taskId: z.uuid(),
+  actualQty: z.int().optional(),
+});
 
-  @IsUUID()
-  @IsNotEmpty()
-  taskId!: string;
-
-  @IsInt()
-  @IsOptional()
-  actualQty!: number;
-}
+// Export the TypeScript type inferred from the schema
+export class AssignTaskDto extends createZodDto(AssignTaskSchema) {}
